@@ -1,0 +1,443 @@
+/* 전체 스타일 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a2e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460);
+}
+
+.game-container {
+    width: 800px;
+    height: 600px;
+    background-color: #0f3460;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #e94560;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-header {
+    background-color: #16213e;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e94560;
+    box-shadow: 0 2px 10px rgba(233, 69, 96, 0.3);
+}
+
+.game-header h1 {
+    font-size: 24px;
+    color: #ffcc00;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.game-header h1::after {
+    content: '백화점';
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: -60px;
+    color: #fff;
+}
+
+.game-stats {
+    display: flex;
+    gap: 20px;
+    background-color: rgba(15, 52, 96, 0.7);
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+.score, .time, .level {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+}
+
+.game-area {
+    position: relative;
+    flex-grow: 1;
+    background-color: #16213e;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #16213e 0%, #0f3460 100%);
+    height: 500px; /* 명시적인 높이 설정 */
+    width: 100%;
+}
+
+.player {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect x="13" y="7" width="14" height="13" fill="%233498db"/><rect x="7" y="20" width="26" height="13" fill="%233498db"/><rect x="7" y="33" width="7" height="7" fill="%233498db"/><rect x="26" y="33" width="7" height="7" fill="%233498db"/><rect x="16" y="10" width="3" height="3" fill="%23fff"/><rect x="21" y="10" width="3" height="3" fill="%23fff"/><rect x="17" y="16" width="6" height="1" fill="%23fff"/><rect x="17" y="3" width="6" height="4" fill="%233498db"/></svg>');
+    z-index: 10;
+    transition: transform 0.1s ease-out;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.7);
+    border: 2px solid #fff;
+}
+
+.player::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: #111;
+    border-radius: 50%;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.item {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.item::after {
+    content: attr(data-price);
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.item.pottery {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M20,5 C14,5 10,10 10,15 C10,20 12,25 14,30 C16,35 18,35 20,35 C22,35 24,35 26,30 C28,25 30,20 30,15 C30,10 26,5 20,5 Z" fill="%23a67c52" stroke="%23000" stroke-width="1"/><path d="M15,15 C15,15 20,20 25,15" stroke="%23000" stroke-width="1" fill="none"/></svg>');
+    border: 1px solid #cd853f;
+    background-image: radial-gradient(#a0522d, #8B4513);
+}
+
+.item.gold {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect x="5" y="10" width="30" height="20" fill="%23ffd700" stroke="%23000" stroke-width="1"/><rect x="7" y="12" width="26" height="16" fill="%23ffeb3b" stroke="%23000" stroke-width="0.5"/><text x="20" y="25" font-family="Arial" font-size="8" text-anchor="middle" fill="%23000">GOLD</text></svg>');
+    border: 1px solid #fff8dc;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    background-image: radial-gradient(#fafad2, #FFD700);
+}
+
+.item.diamond {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><polygon points="20,5 5,20 20,35 35,20" fill="%239b59b6" stroke="%23000" stroke-width="1"/><polygon points="20,10 10,20 20,30 30,20" fill="%23d6b3e5" stroke="%23000" stroke-width="0.5"/></svg>');
+    border: 1px solid #afeeee;
+    box-shadow: 0 0 15px rgba(185, 242, 255, 0.8);
+    background-image: radial-gradient(#e0ffff, #B9F2FF);
+}
+
+.item.stolen {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.guard {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect x="13" y="7" width="14" height="13" fill="%23e74c3c"/><rect x="7" y="20" width="26" height="13" fill="%23e74c3c"/><rect x="7" y="33" width="7" height="7" fill="%23e74c3c"/><rect x="26" y="33" width="7" height="7" fill="%23e74c3c"/><rect x="16" y="10" width="3" height="3" fill="%23fff"/><rect x="21" y="10" width="3" height="3" fill="%23fff"/><rect x="17" y="16" width="6" height="1" fill="%23000"/><rect x="17" y="3" width="6" height="4" fill="%23e74c3c"/></svg>');
+    z-index: 5;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.7);
+    border: 2px solid #c0392b;
+    background-image: radial-gradient(#e74c3c, #c0392b);
+}
+
+/* 경찰 느낌표 */
+.guard-alert {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="%23ff0000" stroke="%23000" stroke-width="1"/><text x="10" y="15" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="%23fff">!</text></svg>');
+    top: -20px;
+    left: 10px;
+    z-index: 6;
+    animation: bounce 0.5s infinite alternate;
+    display: none;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+.game-controls {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #16213e;
+    border-top: 2px solid #e94560;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: #ffd700;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+}
+
+.modal-content h2 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* 경찰 사이렌 효과 */
+.alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.2);
+    z-index: 50;
+    pointer-events: none;
+    animation: siren 0.5s infinite alternate;
+}
+
+@keyframes siren {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 아이템 획득 효과 */
+.item-collected {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffcc00;
+    pointer-events: none;
+    animation: float-up 1s forwards;
+}
+
+@keyframes float-up {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* 나무 상자 */
+.wooden-box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect x="5" y="5" width="40" height="40" fill="%23a67c52" stroke="%23000" stroke-width="2"/><line x1="5" y1="15" x2="45" y2="15" stroke="%23000" stroke-width="1"/><line x1="5" y1="25" x2="45" y2="25" stroke="%23000" stroke-width="1"/><line x1="5" y1="35" x2="45" y2="35" stroke="%23000" stroke-width="1"/></svg>');
+    z-index: 4;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(166, 124, 82, 0.5);
+    border: 2px solid #8B4513;
+    border-radius: 5px;
+}
+
+/* 숨기 상태 */
+.player.hidden {
+    opacity: 0.3;
+    z-index: 3; /* 상자보다 낮은 z-index */
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+    filter: blur(2px);
+}
+
+.wooden-box.active {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+    border-color: #FFD700;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 15px rgba(255, 204, 0, 0.5); }
+    100% { box-shadow: 0 0 25px rgba(255, 204, 0, 0.9); }
+}
+
+/* 미니맵 */
+.minimap {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 150px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #fff;
+    border-radius: 5px;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.minimap-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.minimap-floor {
+    position: absolute;
+    width: 100%;
+    height: 25%;
+    border-bottom: 1px solid #555;
+}
+
+.minimap-floor-1 { bottom: 0; background-color: rgba(248, 248, 248, 0.3); }
+.minimap-floor-2 { bottom: 20%; background-color: rgba(240, 240, 240, 0.3); }
+.minimap-floor-3 { bottom: 40%; background-color: rgba(232, 232, 232, 0.3); }
+.minimap-floor-4 { bottom: 60%; background-color: rgba(224, 224, 224, 0.3); }
+.minimap-floor-5 { bottom: 80%; background-color: rgba(192, 192, 192, 0.3); }
+
+.minimap-player {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #3498db;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 102;
+}
+
+.minimap-guard {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+}
+
+/* 계단 스타일 */
+.stairs {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 60"><rect width="40" height="60" fill="%23aaa" stroke="%23666" stroke-width="1"/><line x1="0" y1="10" x2="40" y2="10" stroke="%23666" stroke-width="1"/><line x1="0" y1="20" x2="40" y2="20" stroke="%23666" stroke-width="1"/><line x1="0" y1="30" x2="40" y2="30" stroke="%23666" stroke-width="1"/><line x1="0" y1="40" x2="40" y2="40" stroke="%23666" stroke-width="1"/><line x1="0" y1="50" x2="40" y2="50" stroke="%23666" stroke-width="1"/></svg>');
+    z-index: 3;
+    box-shadow: 0 0 15px rgba(170, 170, 170, 0.5);
+    border: 2px solid #888;
+    border-radius: 5px;
+    animation: highlight 2s infinite alternate;
+}
+
+@keyframes highlight {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* 헬리콥터 스타일 */
+.helicopter {
+    position: absolute;
+    width: 100px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect x="30" y="20" width="40" height="20" fill="%233498db" stroke="%232980b9" stroke-width="1"/><rect x="20" y="30" width="60" height="10" fill="%232980b9" stroke="%23000" stroke-width="1"/><rect x="70" y="25" width="20" height="5" fill="%233498db" stroke="%232980b9" stroke-width="1"/><circle cx="80" cy="25" r="10" fill="%23666" stroke="%23000" stroke-width="1"/><rect x="10" y="25" width="20" height="5" fill="%233498db" stroke="%232980b9" stroke-width="1"/><rect x="45" y="10" width="10" height="10" fill="%233498db" stroke="%232980b9" stroke-width="1"/><rect x="0" y="15" width="100" height="2" fill="%23000"/></svg>');
+    z-index: 6;
+    animation: helicopter-rotor 0.1s infinite linear;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.7);
+    border: 2px solid #2980b9;
+    border-radius: 10px;
+}
+
+@keyframes helicopter-rotor {
+    0% { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect x="30" y="20" width="40" height="20" fill="%23333" stroke="%23000" stroke-width="1"/><rect x="20" y="30" width="60" height="10" fill="%23444" stroke="%23000" stroke-width="1"/><rect x="70" y="25" width="20" height="5" fill="%23333" stroke="%23000" stroke-width="1"/><circle cx="80" cy="25" r="10" fill="%23666" stroke="%23000" stroke-width="1"/><rect x="10" y="25" width="20" height="5" fill="%23333" stroke="%23000" stroke-width="1"/><rect x="45" y="10" width="10" height="10" fill="%23333" stroke="%23000" stroke-width="1"/><rect x="0" y="15" width="100" height="2" fill="%23000"/></svg>'); }
+    50% { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect x="30" y="20" width="40" height="20" fill="%23333" stroke="%23000" stroke-width="1"/><rect x="20" y="30" width="60" height="10" fill="%23444" stroke="%23000" stroke-width="1"/><rect x="70" y="25" width="20" height="5" fill="%23333" stroke="%23000" stroke-width="1"/><circle cx="80" cy="25" r="10" fill="%23666" stroke="%23000" stroke-width="1"/><rect x="10" y="25" width="20" height="5" fill="%23333" stroke="%23000" stroke-width="1"/><rect x="45" y="10" width="10" height="10" fill="%23333" stroke="%23000" stroke-width="1"/><rect x="15" y="15" width="70" height="2" fill="%23000"/></svg>'); }
+}
+
+/* 총알 스타일 */
+.bullet {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    z-index: 4;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+    animation: bullet-trail 0.5s infinite;
+}
+
+@keyframes bullet-trail {
+    0% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(255, 204, 0, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.5); }
+}
+
+/* 기절 효과 */
+.stunned {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.stunned::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><text x="10" y="15" font-family="Arial" font-size="15" fill="%23ffcc00">@.@</text></svg>');
+    z-index: 6;
+}

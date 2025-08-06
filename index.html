@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백화점 도둑 게임</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>도둑 게임</h1>
+            <div class="game-stats">
+                <div class="score">점수: <span id="score">0</span></div>
+                <div class="time">시간: <span id="time">60</span>초</div>
+                <div class="level">레벨: <span id="level">1</span></div>
+                <div class="money">훔친 금액: <span id="money">0</span>원</div>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <div id="player" class="player"></div>
+            <!-- 아이템들은 JavaScript로 동적 생성됩니다 -->
+            <div class="minimap">
+                <div class="minimap-content">
+                    <div class="minimap-floor minimap-floor-5"></div>
+                    <div class="minimap-floor minimap-floor-4"></div>
+                    <div class="minimap-floor minimap-floor-3"></div>
+                    <div class="minimap-floor minimap-floor-2"></div>
+                    <div class="minimap-floor minimap-floor-1"></div>
+                    <div id="minimap-player" class="minimap-player"></div>
+                    <!-- 경비원들은 JavaScript로 동적 생성됩니다 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-controls">
+            <button id="startBtn">게임 시작</button>
+            <button id="restartBtn" style="display: none;">다시 시작</button>
+        </div>
+        
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <h2>게임 종료!</h2>
+                <p>최종 점수: <span id="finalScore">0</span></p>
+                <p>최종 레벨: <span id="finalLevel">1</span></p>
+                <p>훔친 총 금액: <span id="finalMoney">0</span>원</p>
+                <button id="playAgainBtn">다시 하기</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
